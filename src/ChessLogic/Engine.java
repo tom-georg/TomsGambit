@@ -18,36 +18,29 @@ public class Engine {
 		ArrayList<int[]> pieces = new ArrayList<int[]>();
 		pieces = getPieces(board, COLOR);
 		
-		int score = status.getScore(COLOR);
+		int score = -100000;
 
 		ArrayList<Move> moves = new ArrayList<Move>();
 		for (int[] piece : pieces) {
 			ArrayList<int[]> possiblePieceMoves= MoveValidator.getMoves(board, piece[0], piece[1]);
-			ArrayList<Move> bestPieceMove = new ArrayList<>();
+
 			for (int[] destination : possiblePieceMoves) {
 
 				Move nMove = new Move(piece[0], piece[1],destination[0],destination[1]);
-				if(moves.size()==0) {
-					moves.add(nMove);
-				}
+
 				int[][] tBoard = Arrays.stream(board).map(int[]::clone).toArray(int[][]::new);
 				Status tStatus = status.copy();
 				Board.move(tBoard, nMove,tStatus);
 
 				Status nStatus = move(tBoard, debth-1, !COLOR, tStatus);
 
-				if(nStatus.getScore(COLOR)<score) {
-
-			//		Printer.printBaord(tBoard);
-			//		System.out.println(nStatus);
-
+				if(nStatus.getScore(COLOR)>score) {
+				//	System.out.println(" Score! "+Board.pieces[board[piece[0]][piece[1]]]+"-"+nMove);
 					score = nStatus.getScore(COLOR);
 					moves.clear();
 				}
 				if(nStatus.getScore(COLOR)>=score) {
-					if(COLOR == Board.BLACK) {
-			//			System.out.println("SATESAAAA!!!!");
-					}
+
 					moves.add(nMove);
 				}
 			//	System.out.println(moves);
@@ -56,7 +49,9 @@ public class Engine {
 
 			
 		}
-		
+		if(debth==4){
+			System.out.println(moves);
+		}
 		Move move = null;
 		if(moves.size()>0) {
 			move = moves.get(new Random().nextInt(moves.size()));

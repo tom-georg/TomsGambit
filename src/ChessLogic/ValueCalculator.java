@@ -30,13 +30,13 @@ public class ValueCalculator {
 		pieces[3] = 3;  //KNIGHT_WHITE = 3;
 		pieces[4] = 3;    //BISHOP_WHITE = 4;
 		pieces[5] = 9;   //QUEEN_WHITE= 5;
-		pieces[6] = 1000; //KING_WHITE = 6;
+		pieces[6] = 10000; //KING_WHITE = 6;
 		pieces[7] = 1;    //PAWN_BLACK = 7;
 		pieces[8] = 5;   //ROOK_BLACK = 8;
 		pieces[9] = 3;  //KNIGHT_BLACK = 9;
 		pieces[10] = 3;  //BISHOP_BLACK = 10;
 		pieces[11] = 9;   //QUEEN_BLACK = 11;
-		pieces[12] = 1000; //KING_BLACK = 12;
+		pieces[12] = 10000; //KING_BLACK = 12;
 		
 		
 	}

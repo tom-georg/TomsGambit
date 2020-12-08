@@ -15,7 +15,7 @@ import com.sun.net.httpserver.HttpServer;
 public class Server {
 
     public static void main(String[] args) throws Exception {
-        HttpServer server = HttpServer.create(new InetSocketAddress(8000), 0);
+        HttpServer server = HttpServer.create(new InetSocketAddress(8080), 0);
 
         server.createContext("/getmove", new MyHandler());
         server.setExecutor(null); // creates a default executor
@@ -37,8 +37,13 @@ public class Server {
 
 
             Status status = new Status(null, valueWhite, valueBlack);
+            try{
+                status = Engine.move(board,4,Board.BLACK,status);
+            }catch(Exception e){
+                e.printStackTrace();
 
-            status = Engine.move(board,5,Board.BLACK,status);
+            }
+
             System.out.println("Endguetig: "+status);
             Printer.printBaord(board);
             InputStream inputStream = t.getRequestBody();
