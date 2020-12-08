@@ -22,7 +22,7 @@ public class Board {
 	public static final boolean BLACK = false;
 	public static final boolean WHITE = true;
 			
-	
+	public static final String[] pieces = new String[]{"","PAWN_WHITE","ROOK_WHITE","KNIGHT_WHITE","BISHOP_WHITE","QUEEN_WHITE","KING_WHITE","PAWN_BLACK","ROOK_BLACK","KNIGHT_BLACK","BISHOP_BLACK","QUEEN_BLACK","KING_BLACK"};
 	public Board() {
 		
 	}
@@ -96,6 +96,7 @@ public class Board {
 		}
 		if(isWhite(board[move.toX][move.toY])) {
 			int value = ValueCalculator.pieces[board[move.toX][move.toY]];
+
 			status.subFrom(WHITE, value);
 		}
 		

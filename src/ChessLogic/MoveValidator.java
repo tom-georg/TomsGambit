@@ -47,7 +47,6 @@ public class MoveValidator {
 			moves.addAll(getBishopMoves(board, x, y));
 			return moves;
 		case Board.BISHOP_WHITE:
-
 			moves.addAll(getBishopMoves(board, x, y));
 			return moves;
 		case Board.KNIGHT_WHITE:
@@ -64,44 +63,42 @@ public class MoveValidator {
 	
 	private static ArrayList<int[]> getKightMoves(int[][] board, int x, int y) {
 		ArrayList<int[]> list = new ArrayList<>(10);
-		 boolean color = false;;
-		if(Board.isWhite(board[x][y])) {
-			color = Board.WHITE;
-		}
+		boolean color = Board.isWhite(board[x][y]);
+
 		if(x-1>=0&&y-2>=0
-				&&Board.isSameTeam(board, x, y, color)==false) {
+				&&Board.isSameTeam(board, x-1, y-2, color)==false) {
 			list.add(new int[] {x-1,y-2});
 		}
 			
 		if(x+1<board.length&&y-2>=0
-				&&Board.isSameTeam(board, x, y, color)==false) {
+				&&Board.isSameTeam(board, x+1, y-2, color)==false) {
 			 list.add(new int[] {x+1,y-2});
 		}
 		
-		if(x-1>=0&&y+2>=0
-				&&Board.isSameTeam(board, x, y, color)==false) {
+		if(x-1>=0&&y+2<board.length
+				&&Board.isSameTeam(board, x-1, y+2, color)==false) {
 			list.add(new int[] {x-1,y+2});
 		}
 		if(x+1<board.length&&y+2<board.length
-				&&Board.isSameTeam(board, x, y, color)==false) {
+				&&Board.isSameTeam(board, x+1, y+2, color)==false) {
 			list.add(new int[] {x+1,y+2});
 		}
 		
 		if(x-2>=0&&y-1>=0
-				&&Board.isSameTeam(board, x, y, color)==false) {
+				&&Board.isSameTeam(board, x-2, y-1, color)==false) {
 			list.add(new int[] {x-2,y-1});
 		}
 		if(x-2>=0&&y+1<board.length
-				&&Board.isSameTeam(board, x, y, color)==false) {
+				&&Board.isSameTeam(board, x-2, y+1, color)==false) {
 			list.add(new int[] {x-2,y+1});
 		}
 		
 		if(x+2<board.length&&y-1>=0
-				&&Board.isSameTeam(board, x, y, color)==false) {
+				&&Board.isSameTeam(board, x+2, y-1, color)==false) {
 			list.add(new int[] {x+2,y-1});
 		}
 		if(x+2<board.length&&y+1<board.length
-				&&Board.isSameTeam(board, x, y, color)==false) {
+				&&Board.isSameTeam(board, x+2, y+1, color)==false) {
 			list.add(new int[] {x+2,y+1});
 		}
 	
@@ -219,7 +216,7 @@ public class MoveValidator {
 	 * @param board
 	 * @param x
 	 * @param y
-	 * @param color
+	 * @param
 	 * @return
 	 */
 	private static boolean canMoveHere(int[][] board, int x, int y, boolean isWhite) {

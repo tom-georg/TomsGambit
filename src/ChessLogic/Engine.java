@@ -16,17 +16,16 @@ public class Engine {
 		}
 		
 		ArrayList<int[]> pieces = new ArrayList<int[]>();
-		pieces = getWhitePieces(board, COLOR);
+		pieces = getPieces(board, COLOR);
 		
-		int value = status.getScore(COLOR);
-		
-		
+		int score = status.getScore(COLOR);
+
 		ArrayList<Move> moves = new ArrayList<Move>();
 		for (int[] piece : pieces) {
 			ArrayList<int[]> possiblePieceMoves= MoveValidator.getMoves(board, piece[0], piece[1]);
-			
+			ArrayList<Move> bestPieceMove = new ArrayList<>();
 			for (int[] destination : possiblePieceMoves) {
-		
+
 				Move nMove = new Move(piece[0], piece[1],destination[0],destination[1]);
 				if(moves.size()==0) {
 					moves.add(nMove);
@@ -34,18 +33,18 @@ public class Engine {
 				int[][] tBoard = Arrays.stream(board).map(int[]::clone).toArray(int[][]::new);
 				Status tStatus = status.copy();
 				Board.move(tBoard, nMove,tStatus);
-			
+
 				Status nStatus = move(tBoard, debth-1, !COLOR, tStatus);
-				
-				if(nStatus.getScore(COLOR)>value) {
-//					System.out.println("clear ");
-//					Printer.printBaord(tBoard);
-//					System.out.println(nStatus);
-//					System.out.println("sdfsadf#######");
-					value = nStatus.getScore(COLOR);
+
+				if(nStatus.getScore(COLOR)<score) {
+
+			//		Printer.printBaord(tBoard);
+			//		System.out.println(nStatus);
+
+					score = nStatus.getScore(COLOR);
 					moves.clear();
 				}
-				if(nStatus.getScore(COLOR)>=value) {
+				if(nStatus.getScore(COLOR)>=score) {
 					if(COLOR == Board.BLACK) {
 			//			System.out.println("SATESAAAA!!!!");
 					}
@@ -69,7 +68,7 @@ public class Engine {
 		
 	}
 	
-	public static ArrayList<int[]> getWhitePieces(int[][] board, final boolean COLOR){
+	public static ArrayList<int[]> getPieces(int[][] board, final boolean COLOR){
 		ArrayList<int[]> pieces = new ArrayList<int[]>();
 		for(int x = 0; x < board.length;x++) {
 			for(int y = 0;y<board[0].length;y++) {

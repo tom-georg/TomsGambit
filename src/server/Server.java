@@ -30,12 +30,16 @@ public class Server {
             String query = t.getRequestURI().getQuery();
             Map<String,String> parameters = queryToMap(query);
             String strBoard = parameters.get("board");
+            ValueCalculator.init();
             int[][] board = createBoard(strBoard);
             int valueWhite = ValueCalculator.getValueWhite(board);
             int valueBlack = ValueCalculator.getValueBlack(board);
-            Status status = new Status(null, valueWhite, valueBlack);
-            status = Engine.move(board,4,Board.BLACK,status);
 
+
+            Status status = new Status(null, valueWhite, valueBlack);
+
+            status = Engine.move(board,5,Board.BLACK,status);
+            System.out.println("Endguetig: "+status);
             Printer.printBaord(board);
             InputStream inputStream = t.getRequestBody();
             byte[] bytebody = new byte[300];

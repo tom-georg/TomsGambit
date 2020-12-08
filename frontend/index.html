@@ -199,6 +199,7 @@ const ChessBoard = {
         this.selectedCell.piece=0
         this.selectedCell=ncell
         this.selectedCell=undefined
+        this.moveBlack();
       } 
 
         this.message=ncell.x+" "+ncell.y
@@ -233,29 +234,32 @@ const ChessBoard = {
         }
       }
       strlist=strlist.slice(0, -1)//schneide das letzte Zeichen ab
-      const Http = new XMLHttpRequest();
-      const url='http://127.0.0.1:8000/getmove?board='+strlist;
-      Http.open("GET", url);
-      Http.send();
 
-      Http.onreadystatechange = function(){
-        if(this.readyState == 4 && this.status===200){
- 
-          alert(Http.responseText)
-          this.message= Http.responseText;
-          var teile = Http.responseText.split("-");
-          this.message=teile;
-          var fromx = teile[0].replace("x:","");
-        
-          var fromy = teile[1].replace("y:","");
-          var tox = teile[2].replace("x:","");
-          var toy = teile[3].replace("y:","");
-          alert(toy+" "+tox);
+
+      fetch('http://127.0.0.1:8000/getmove?board='+strlist)
+      .then(response => response.text())
+        .then((response) => {
           
-          //this.board[toy][tox].piece = this.board[fromy][fromx].piece;
-         // this.board[0][0].piece=0;
-        }
-      }
+      
+        var body = response
+       
+        this.message= response
+        var teile = response.split("-");
+        this.message=teile;
+        var fromx = teile[0].replace("x:","");
+      
+        var fromy = teile[1].replace("y:","");
+        var tox = teile[2].replace("x:","");
+        var toy = teile[3].replace("y:","");
+       
+        
+        this.board[toy][tox].piece = this.board[fromy][fromx].piece;
+        this.board[fromy][fromx].piece=0;
+      })
+      .catch(error => {
+        this.errorMessage = error;
+        console.error("There was an error!", error);
+      });
     }
   }
 }
