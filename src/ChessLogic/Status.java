@@ -1,8 +1,8 @@
 package ChessLogic;
 
 public class Status {
-	
-	Move move;
+
+	public Move move;
 	
 	private int valueWhite;
 	private int valueBlack;

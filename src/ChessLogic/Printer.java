@@ -15,7 +15,7 @@ public class Printer {
 //	public static final int QUEEN_BLACK = 11;
 //	public static final int KING_BLACK = 12; 
 	
-	private final static char[] pieces = {'_','P','R','K','B','Q','K','p','r','k','b','q','k'};
+	private final static char[] pieces = {'_','♙','♖','♘','♗','♕','♔','♟','♜','♞','♝','♛','♚'};
 	
 	public static void printBaord(int[][] board) {
 		String output="";

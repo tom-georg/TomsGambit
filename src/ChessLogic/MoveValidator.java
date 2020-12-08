@@ -47,7 +47,7 @@ public class MoveValidator {
 			moves.addAll(getBishopMoves(board, x, y));
 			return moves;
 		case Board.BISHOP_WHITE:
-			moves.addAll(getRookMoves(board,x,y));
+
 			moves.addAll(getBishopMoves(board, x, y));
 			return moves;
 		case Board.KNIGHT_WHITE:

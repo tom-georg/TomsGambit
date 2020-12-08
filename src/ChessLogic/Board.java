@@ -81,13 +81,14 @@ public class Board {
 
 	
 	public static void move(int[][] board, Move move) {
+
 		board[move.toX][move.toY] = board[move.fromX][move.fromY];
 		board[move.fromX][move.fromY] = 0;
 	}
 	
 	public static void move(int[][] board, Move move,Status status) {
-		
-		status.move= move;
+		status.move = move;
+
 		if(isBlack(board[move.toX][move.toY])) {
 			int value = ValueCalculator.pieces[board[move.toX][move.toY]];
 			

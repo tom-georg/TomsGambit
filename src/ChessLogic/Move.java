@@ -1,12 +1,12 @@
 package ChessLogic;
 
-class Move {
+public class Move {
 	
-	int fromX;
-	int fromY;
+	public int fromX;
+	public int fromY;
 	
-	int toX;
-	int toY;
+	public int toX;
+	public int toY;
 	public Move(int fromX, int fromY, int toX, int toY) {
 		super();
 		this.fromX = fromX;
@@ -19,6 +19,8 @@ class Move {
 		Move nMove = new Move(fromX, fromY, toX, toY);
 		return nMove;
 	}
+
+
 	@Override
 	public String toString() {
 		return "Move [fromX=" + fromX + ", fromY=" + fromY + ", toX=" + toX + ", toY=" + toY + "]";
