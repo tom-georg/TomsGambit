@@ -237,7 +237,7 @@ const ChessBoard = {
       strlist=strlist.slice(0, -1)//schneide das letzte Zeichen ab
 
 
-      fetch('http://127.0.0.1:8080/getmove?board='+strlist)
+      fetch('http://18.159.46.61:8080/getmove?board='+strlist)
       .then(response => response.text())
         .then((response) => {
           

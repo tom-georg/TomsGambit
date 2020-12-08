@@ -27,14 +27,14 @@ public class MoveValidator {
 			moves = getKightMoves(board,x,y);
 			return moves;
 		case Board.BISHOP_BLACK:
-			moves = getBishopMoves(board, x, y);
-			return moves;
+				moves = getBishopMoves(board, x, y);
+				return moves;
 		case Board.QUEEN_BLACK:
 			moves.addAll(getRookMoves(board,x,y));
 			moves.addAll(getBishopMoves(board, x, y));
 			return moves;
 		case Board.KING_BLACK:
-			moves = new ArrayList<>();
+			moves = getKingMoves(board,x,y);
 			return moves;		
 		case Board.PAWN_WHITE:
 			moves = getPawnMoves(board, x, y);
@@ -52,6 +52,9 @@ public class MoveValidator {
 		case Board.KNIGHT_WHITE:
 			moves = getKightMoves(board,x,y);
 			return moves;
+		case Board.KING_WHITE:
+			moves = getKingMoves(board,x,y);
+			return moves;
 		
 		default:
 			return new ArrayList<>();
@@ -59,9 +62,58 @@ public class MoveValidator {
 		
 	}
 
+	private static ArrayList<int[]> getKingMoves(int[][]board,int x, int y){
+		ArrayList<int[]> list = new ArrayList<>(10);
+		boolean color = Board.isWhite(board[x][y]);
+		if(y-1>=0
+				&&Board.isSameTeam(board, x, y-1, color)==false) {
+			list.add(new int[] {x,y-1});
+		}
+		if(x+1< board.length&&y-1>=0
+				&&Board.isSameTeam(board, x+1, y-1, color)==false) {
+			list.add(new int[] {x+1,y-1});
+		}
+		if(x+1<board.length
+				&&Board.isSameTeam(board, x+1, y, color)==false) {
+			list.add(new int[] {x+1,y});
+		}
+		if(x+1<board.length&&y+1< board.length
+				&&Board.isSameTeam(board, x+1, y+1, color)==false) {
+			list.add(new int[] {x+1,y+1});
+		}
+		if(x<board.length&&y+1< board.length
+				&&Board.isSameTeam(board, x, y+1, color)==false) {
+			list.add(new int[] {x,y+1});
+		}
+		if(x-1>=0&&y+1< board.length
+				&&Board.isSameTeam(board, x-1, y+1, color)==false) {
+			list.add(new int[] {x-1,y+1});
+		}
+		if(x-1>=0&&y-1>=0
+				&&Board.isSameTeam(board, x-1, y-1, color)==false) {
+			list.add(new int[] {x-1,y-1});
+		}
+
+		if(x-1>=0
+				&&Board.isSameTeam(board, x-1, y, color)==false) {
+			list.add(new int[] {x-1,y});
+		}
+		if(x-1>=0&&y-1>=0
+				&&Board.isSameTeam(board, x-1, y-1, color)==false) {
+			list.add(new int[] {x-1,y-1});
+		}
+
+
+		return list;
+
+
+	}
+
 
 	
 	private static ArrayList<int[]> getKightMoves(int[][] board, int x, int y) {
+
+
 		ArrayList<int[]> list = new ArrayList<>(10);
 		boolean color = Board.isWhite(board[x][y]);
 
@@ -105,6 +157,7 @@ public class MoveValidator {
 		
 		return list;
 	}
+
 
 
 
@@ -282,10 +335,10 @@ public class MoveValidator {
 			if(y==board.length-2&&board[x][y-2]==0) {
 				 moves.add(new int[]{x,y-2});
 			}
-		} 
-			
-		
-		
+		}
+
+
+
 		return moves;
 	}
 
